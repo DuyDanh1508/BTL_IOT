@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT - Profile</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo"><i class="fa-solid fa-microchip"></i> IOT</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="datasensor.html" class="menu-item"><i class="fa-solid fa-folder-open"></i> Data Sensor</a>
+                <a href="history.html" class="menu-item"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử</a>
+                <a href="profile.html" class="menu-item active"><i class="fa-solid fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-right">
+                    <i class="fa-solid fa-bell"></i>
+                    <div class="user-info">
+                        <div class="avatar">D</div>
+                        <span>Danh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="page">
+                <div class="page-header">
+                    <h1>Profile</h1>
+                    <div class="action-buttons">
+                        <button class="btn-save" onclick="saveProfile()">
+                            <i class="fa-solid fa-floppy-disk"></i> Save
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-wrapper">
+                    <div class="profile-container">
+
+                        <!-- ✅ AVATAR + UPLOAD -->
+                        <div class="profile-info">
+                            <div class="profile-avatar-wrapper">
+                                <div class="profile-avatar" id="avatar-preview">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+                                <label for="avatar-input" class="btn-upload-avatar" title="Đổi ảnh đại diện">
+                                    <i class="fa-solid fa-camera"></i>
+                                </label>
+                            </div>
+
+                            <div class="profile-details">
+                                <p><strong>Họ và tên:</strong> <span id="display-name">--</span></p>
+                                <p><strong>MSV:</strong> <span id="display-msv">--</span></p>
+                                <p><strong>Lớp:</strong> <span id="display-class">--</span></p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- FORM CHỈNH SỬA -->
+                        <div class="profile-form">
+                            <div class="form-group">
+                                <label>MSV:</label>
+                                <input type="text" id="input-msv" placeholder="Nhập MSV...">
+                            </div>
+                            <div class="form-group">
+                                <label>LỚP:</label>
+                                <input type="text" id="input-class" placeholder="Nhập lớp...">
+                            </div>
+                            <div class="form-group">
+                                <label>LINK GITHUB:</label>
+                                <input type="text" id="link-github" placeholder="https://github.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>LINK FIGMA:</label>
+                                <input type="text" id="link-figma" placeholder="https://figma.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>LINK POSTMAN:</label>
+                                <input type="text" id="link-postman" placeholder="https://postman.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>LINK PDF:</label>
+                                <input type="text" id="link-pdf" placeholder="https://drive.google.com/...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/api.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+</html>

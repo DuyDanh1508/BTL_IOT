@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT - Data Sensor</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/datasensor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo"><i class="fa-solid fa-microchip"></i> IOT</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="datasensor.html" class="menu-item active"><i class="fa-solid fa-folder-open"></i> Data Sensor</a>
+                <a href="history.html" class="menu-item"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử</a>
+                <a href="profile.html" class="menu-item"><i class="fa-solid fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-right">
+                    <i class="fa-solid fa-bell"></i>
+                    <div class="user-info">
+                        <div class="avatar">D</div>
+                        <span>Danh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NỘI DUNG DATA SENSOR -->
+            <section class="page sensor-page">
+                <h1>DATA SENSOR</h1>
+                <div class="table-container">
+                    <!-- Bộ lọc: nhập text + chọn dropdown + nút tìm -->
+                    <div class="filter-bar">
+                        <!-- Ô nhập từ khóa tìm kiếm -->
+                        <input
+                            type="text"
+                            class="search-input"
+                            id="search-input"
+                            placeholder="Nhập thông tin tìm kiếm..."
+                            onkeypress="if(event.key==='Enter') filterSensorData()"
+                        >
+
+                        <!-- ✅ Dropdown chọn CỘT để tìm kiếm -->
+                        <select class="column-select" id="search-column">
+                            <option value="all">Tất cả</option>
+                            <option value="id">ID</option>
+                            <option value="type">Loại cảm biến</option>
+                            <option value="value">Giá trị</option>
+                            <option value="time">Thời gian đo</option>
+                        </select>
+
+                        <!-- Nút tìm kiếm -->
+                        <button class="btn-search-blue" onclick="filterSensorData()">
+                            Tìm kiếm <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+                        <!-- Sắp xếp theo giá trị -->
+                        <select class="sort-select" id="sort-order">
+                            <option value="">Sắp xếp</option>
+                            <option value="asc">Giá trị tăng dần</option>
+                            <option value="desc">Giá trị giảm dần</option>
+                        </select>
+
+                        <!-- Số bản ghi mỗi trang -->
+                        <select class="page-size-select" id="page-size" onchange="changePageSize()">
+                            <option value="5">5 bản ghi/trang</option>
+                            <option value="10" selected>10 bản ghi/trang</option>
+                            <option value="15">15 bản ghi/trang</option>
+                            <option value="20">20 bản ghi/trang</option>
+                        </select>
+                    </div>
+
+                    <!-- Bảng có scroll riêng -->
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Loại cảm biến</th>
+                                    <th>Giá trị</th>
+                                    <th>Thời gian đo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sensor-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/api.js"></script>
+    <script src="../js/ws.js"></script>
+    <script src="../js/datasensor.js"></script>
+</body>
+</html>

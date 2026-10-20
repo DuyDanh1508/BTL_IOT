@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT - Lịch sử</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo"><i class="fa-solid fa-microchip"></i> IOT</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="datasensor.html" class="menu-item"><i class="fa-solid fa-folder-open"></i> Data Sensor</a>
+                <a href="history.html" class="menu-item active"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử</a>
+                <a href="profile.html" class="menu-item"><i class="fa-solid fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-right">
+                    <i class="fa-solid fa-bell"></i>
+                    <div class="user-info">
+                        <div class="avatar">D</div>
+                        <span>Danh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NỘI DUNG LỊCH SỬ -->
+            <section class="page history-page">
+                <div class="page-header">
+                    <h1>Lịch sử</h1>
+                    <button class="btn-create"><i class="fa-solid fa-plus"></i> Create</button>
+                </div>
+
+                <div class="table-container">
+                    <!-- Bộ lọc: nhập text + chọn dropdown + ngày + nút tìm -->
+                    <div class="history-filters">
+                        <!-- Dropdown: Tên thiết bị -->
+                        <select class="filter-select" id="filter-device">
+                            <option value="">Tên thiết bị</option>
+                            <option value="Đèn 1">Đèn 1</option>
+                            <option value="Đèn 2">Đèn 2</option>
+                            <option value="Đèn 3">Đèn 3</option>
+                        </select>
+
+                        <!-- Dropdown: Hành động -->
+                        <select class="filter-select" id="filter-action">
+                            <option value="">Hành động</option>
+                            <option value="ON">ON</option>
+                            <option value="OFF">OFF</option>
+                        </select>
+
+                        <!-- Dropdown: Trạng thái -->
+                        <select class="filter-select" id="filter-status">
+                            <option value="">Trạng thái</option>
+                            <option value="SUCCESS">SUCCESS</option>
+                            <option value="LOADING">LOADING</option>
+                            <option value="FAILED">FAILED</option>
+                        </select>
+
+                        <!-- Ô input: Tìm theo thời gian -->
+                        <input
+                            type="text"
+                            class="time-input"
+                            id="filter-time"
+                            placeholder="Nhập thời gian ..."
+                        >
+
+                        <!-- Nút Tìm kiếm (vẫn giữ để nhấn Enter hoặc click) -->
+                        <button class="btn-search-blue" onclick="filterHistoryData()">
+                            Tìm kiếm <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+                        <!-- Nút Xóa lọc -->
+                        <button class="btn-clear" onclick="clearFilters()" title="Xóa bộ lọc">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                        <!-- ✅ Dropdown chọn số bản ghi -->
+                        <select class="page-size-select" id="page-size" onchange="changePageSize()">
+                            <option value="5">5 bản ghi/trang</option>
+                            <option value="10" selected>10 bản ghi/trang</option>
+                            <option value="15">15 bản ghi/trang</option>
+                            <option value="20">20 bản ghi/trang</option>
+                        </select>
+                    </div>
+
+                    <!-- Bảng có scroll riêng -->
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Tên thiết bị</th>
+                                    <th>Hành động</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thời gian bật/tắt</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/api.js"></script>
+    <script src="../js/ws.js"></script>
+    <script src="../js/history.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT - Dashboard</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo"><i class="fa-solid fa-microchip"></i> IOT</div>
+            <nav class="menu">
+                <a href="dashboard.html" class="menu-item active"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="datasensor.html" class="menu-item"><i class="fa-solid fa-folder-open"></i> Data Sensor</a>
+                <a href="history.html" class="menu-item"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử</a>
+                <a href="profile.html" class="menu-item"><i class="fa-solid fa-user"></i> Profile</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-right">
+                    <i class="fa-solid fa-bell"></i>
+                    <div class="user-info">
+                        <div class="avatar">D</div>
+                        <span>Danh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NỘI DUNG DASHBOARD -->
+            <section class="page">
+                <h1>DASHBOARD</h1>
+
+                <!-- 3 thẻ thống kê -->
+                <div class="stats-cards">
+                    <div class="card"><h3>Nhiệt độ</h3><p id="val-temp">30 °C</p></div>
+                    <div class="card"><h3>Độ ẩm</h3><p id="val-humid">50 %</p></div>
+                    <div class="card"><h3>Ánh sáng</h3><p id="val-light">1000 LUX</p></div>
+                </div>
+
+                <!-- Chart + Control panel -->
+                <div class="dashboard-body">
+                    <div class="chart-section">
+                        <div class="chart-header">
+                            <h3>Biểu đồ của các cảm biến</h3>
+                            <div class="chart-controls">
+                                <div class="legend">
+                                    <span><span class="dot gray"></span> Nhiệt độ</span>
+                                    <span><span class="dot blue"></span> Độ ẩm</span>
+                                    <span><span class="dot dark-blue"></span> Ánh sáng</span>
+                                </div>
+                                <select class="sensor-select" id="sensor-filter">
+                                    <option value="all">Tất cả các cảm biến</option>
+                                    <option value="temp">Chỉ Nhiệt độ</option>
+                                    <option value="humid">Chỉ Độ ẩm</option>
+                                    <option value="light">Chỉ Ánh sáng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-area">
+                            <!-- ✅ Trục Y TRÁI: Nhiệt độ (°C) và Độ ẩm (%) -->
+                            <div class="y-axis y-axis-left">
+                                <span>100</span><span>80</span><span>60</span>
+                                <span>40</span><span>20</span><span>0</span>
+                            </div>
+
+                            <svg class="chart-svg" id="chart-svg" viewBox="0 0 1100 400" preserveAspectRatio="none">
+                                <line class="grid-line" x1="0" y1="0"   x2="1100" y2="0"/>
+                                <line class="grid-line" x1="0" y1="80"  x2="1100" y2="80"/>
+                                <line class="grid-line" x1="0" y1="160" x2="1100" y2="160"/>
+                                <line class="grid-line" x1="0" y1="240" x2="1100" y2="240"/>
+                                <line class="grid-line" x1="0" y1="320" x2="1100" y2="320"/>
+
+                                <polyline id="line-temp"  class="line-temp"  data-sensor="temp"/>
+                                <polyline id="line-humid" class="line-humid" data-sensor="humid"/>
+                                <polyline id="line-light" class="line-light" data-sensor="light"/>
+                            </svg>
+
+                            <!-- ✅ Trục Y PHẢI: Ánh sáng (Lux) -->
+                            <div class="y-axis y-axis-right">
+                                <span>3000</span><span>2400</span><span>1800</span>
+                                <span>1200</span><span>600</span><span>0</span>
+                            </div>
+
+                            <div class="x-axis">
+                                <span>4am</span><span>5am</span><span>6am</span><span>7am</span>
+                                <span>8am</span><span>9am</span><span>10am</span><span>11am</span>
+                                <span>12pm</span><span>1pm</span><span>2pm</span><span>3pm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  Control panel  -->
+                    <div class="control-panel">
+                        <h3>Bật/Tắt đèn led</h3>
+
+                        <div class="switch-row" data-led="1">
+                            <span class="led-icon" id="led1-icon">
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </span>
+                            <span>Đèn 1</span>
+                            <label class="switch">
+                                <input type="checkbox" id="led1">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="status-text" id="led1-status">OFF</span>
+                        </div>
+
+                        <div class="switch-row" data-led="2">
+                            <span class="led-icon" id="led2-icon">
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </span>
+                            <span>Đèn 2</span>
+                            <label class="switch">
+                                <input type="checkbox" id="led2">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="status-text" id="led2-status">OFF</span>
+                        </div>
+
+                        <div class="switch-row" data-led="3">
+                            <span class="led-icon" id="led3-icon">
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </span>
+                            <span>Đèn 3</span>
+                            <label class="switch">
+                                <input type="checkbox" id="led3">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="status-text" id="led3-status">OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/api.js"></script>
+    <script src="../js/ws.js"></script>
+    <script src="../js/chart-data.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

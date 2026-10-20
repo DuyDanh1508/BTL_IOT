@@ -1,0 +1,20 @@
+# Thu vien Node.js
+node_modules/
+
+# Thong tin cau hinh va bi mat
+.env
+.env.*
+!.env.example
+
+# Log
+*.log
+npm-debug.log*
+
+# File tam cua IDE va he dieu hanh
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Anh dai dien duoc tai len khi chay ung dung
+backend/uploads/*
+!backend/uploads/.gitkeep
